@@ -1,0 +1,22 @@
+{
+  "name": "music-demo",
+  "version": "1.0.0",
+  "description": "demo application using electron framework",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron index.js --icon 'app/img/icon.jpg'"
+  },
+  "author": "Vinay",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^1.8.4"
+  },
+  "dependencies": {
+    "base64-arraybuffer": "^0.1.5",
+    "bluebird": "^3.3.5",
+    "glob": "^7.1.2",
+    "mp3-duration": "^1.1.0",
+    "musicmetadata": "^2.0.5",
+    "plyr": "^3.0.3"
+  }
+}

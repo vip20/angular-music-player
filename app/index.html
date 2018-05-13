@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Music Player</title>
+
+    <link href="./bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./styles/app.css" rel="stylesheet">
+
+  </head>
+  <body class="container-fluid" ng-controller="MainController">
+      <form class="form-inline">
+
+          <div class="input-group input-group-lg file-browse-box">
+            <input type="text" class="form-control"
+                  ng-model="selectedFolder"
+                  ng-disabled="true"
+                   placeholder="Choose a folder">
+            <span class="input-group-btn">
+              <span class="btn btn-default btn-file">
+                  <i class="glyphicon glyphicon-folder-open"></i>
+                   <input ng-model="selectedFolder" type="file" webkitdirectory directory multiple file-change-callback = "onFolderSelected" />
+              </span>
+            </span>
+          </div>
+        
+        </form>
+        <form class="form-inline search" ng-if="musicFiles.length > 0">
+            <div class="input-group input-group-lg file-browse-box">
+              <input class="form-control"name="filter" id="filter" placeholder="Filter" ng-change="searchFilterFun(this)" ng-model="searchFilter">
+            </div>
+          </form>
+      <div class="background"></div>
+<h1 class="emptyHeader" ng-if="!musicFiles.length > 0">No Songs in your queue</h1>
+      <section ng-if="musicFiles.length > 0">
+        <div class="album-info">
+          <div class="album-art"><img ng-src="{{art}}" alt="NO IMG"/><span>
+              <h2>{{currentFile}}</h2></span>
+            <div class="actions">
+              <div class="play" ng-if="!isPlaying()" ng-click="playPause()">Play</div>
+              <div class="play" ng-if="isPlaying()" ng-click="playPause()">Pause</div>
+              <!-- <div class="bookmark">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#faa800" height="24" viewbox="0 0 24 24" width="24">
+                  <path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"></path>
+                  <path d="M0 0h24v24H0z" fill="none"></path>
+                </svg>
+              </div> -->
+            </div>
+          </div>
+          <div class="album-details">
+            <!-- <h1>Unleashed</h1><span> <span>Hard Rock </span><span>&copy; 2016 Atlantic Recording Corporation</span></span>
+            <p>Unleashed is the tenth album by American Christian rock band Skillet, released on August 5, 2016. The album was announced on May 20, 2016, and a lyric video was released for the track "Feel Invincible" at the same time on the band's YouTube channel. Six days later, the band released a lyric video for the track "Stars" on their YouTube channel.</p> -->
+          </div>
+        </div>
+        <div class="album-tracks" >
+          <ol>
+            <li ng-click="playMusic(file, $index)"  ng-repeat="file in musicFiles | filter : {'name':temp}" ng-class="{active: activeFile === file}">
+              <span>{{file.name}}</span></li>
+          </ol>
+        </div>
+      </section>
+    <!-- <div class="row">
+      <div class="col-xs-3">
+        <div class="btn-group btn-group-lg" role="group">
+          <button 
+          ng-click="prevSound()"
+          type="button" class="btn btn-default">
+            <i class="glyphicon glyphicon-fast-backward"></i>
+          </button>
+          <button 
+          ng-click="playPause()"
+          type="button" class="btn btn-default">
+            <i 
+            ng-class="{'glyphicon-pause': isPlaying(), 'glyphicon-play': !isPlaying()}"
+            class="glyphicon"></i>
+          </button>
+          <button
+            ng-click="nextSound()"
+           type="button" class="btn btn-default">
+            <i class="glyphicon glyphicon-fast-forward"></i>
+          </button>
+        </div>
+
+      </div>
+      <div class="col-xs-9">
+      
+        <form class="form-inline">
+
+          <div class="input-group input-group-lg file-browse-box">
+            <input type="text" class="form-control"
+                  ng-model="selectedFolder"
+                  ng-disabled="true"
+                   placeholder="Choose a folder">
+            <span class="input-group-btn">
+              <span class="btn btn-default btn-file">
+                  <i class="glyphicon glyphicon-folder-open"></i>
+                   <input ng-model="selectedFolder" type="file" webkitdirectory directory multiple file-change-callback = "onFolderSelected" />
+              </span>
+            </span>
+          </div>
+        
+        </form>
+      </div>
+
+    </div>
+
+
+    <div class="row list-musics-block" ng-show="musicFiles.length > 0">
+      <div class="col-xs-3"></div>
+      <div class="col-xs-9">
+        <div class="panel panel-default">
+          <div class="panel-body">
+
+            <form>
+              <div class="form-group">
+                <input class="form-control" placeholder="filter" ng-model="searchFilter">
+              </div>
+            </form>
+
+            <div class="list-musics">
+              <div class="list-group">
+                <a
+                  href="#"
+                 ng-click="playMusic(file, $index)"
+                  ng-class="{active: activeFile === file}"
+                 class="list-group-item"
+                  ng-repeat="file in musicFiles | filter : searchFilter">{{file.name}}</a>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    
+    <script src="./bower_components/angular/angular.js"></script>
+    <script src="./bower_components/angular-audio/app/angular.audio.js"></script>
+    <script src="scripts/app.js" ></script>
+    <script src="scripts/controllers.js" ></script>
+    <script src="scripts/services.js" ></script>
+    <script src="scripts/directives.js" ></script>
+
+  </body>
+
+</html>
